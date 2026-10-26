@@ -1,0 +1,11 @@
+ACME SUPPLIES PLC
+Bole Road, Addis Ababa
+INVOICE No: INV-2026-0412
+Date: 03 September 2026
+Bill to: Tana Logistics
+Description                Qty   Unit price
+Printer paper A4 (box)      10      350.00
+Toner cartridge              2    2,100.00
+Subtotal                               7,700.00
+VAT 15%                                1,155.00
+TOTAL DUE (ETB)                        8,855.00

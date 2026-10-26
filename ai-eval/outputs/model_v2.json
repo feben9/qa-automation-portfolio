@@ -1,0 +1,6 @@
+{
+  "inv-001": {"invoice_number": "INV-2026-0412", "vendor": "ACME SUPPLIES PLC", "date": "2026-09-03", "total": 7700.00, "currency": "ETB"},
+  "inv-002": {"invoice_number": "RV-7781", "vendor": "Rift Valley Office Furniture Ltd", "date": "2026-09-10", "total": 18800.00, "currency": "ETB"},
+  "inv-003": {"invoice_number": "KTH/0093", "vendor": "KAMPALA TECH HUB LTD", "date": "2026-09-15", "total": 1250000.00, "currency": "UGX"},
+  "inv-004": {"invoice_number": "SC-220", "vendor": "Sheba Catering", "date": "2026-09-21", "total": 24000.00, "currency": "ETB"}
+}
