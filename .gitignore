@@ -5,3 +5,6 @@ node_modules/
 web-api/test-results/
 web-api/playwright-report/
 .DS_Store
+
+performance/results/*
+!performance/results/.gitkeep

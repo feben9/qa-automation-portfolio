@@ -1,0 +1,45 @@
+name: performance-manual
+
+# Stress and spike tests push the API past its limits, so they run on demand only.
+on:
+  workflow_dispatch:
+    inputs:
+      test:
+        description: 'Which test to run'
+        type: choice
+        options: [stress, spike, both]
+        default: both
+      duration_scale:
+        description: 'Multiply stage durations (1 = default, ~1 minute each)'
+        default: '1'
+
+jobs:
+  k6:
+    runs-on: ubuntu-latest
+    env:
+      DURATION_SCALE: ${{ inputs.duration_scale }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Start the target API (localhost only)
+        run: |
+          node performance/api/server.js > performance/api.log 2>&1 &
+          for i in $(seq 1 20); do curl -fs http://localhost:3333/health && break; sleep 1; done
+          curl -fs http://localhost:3333/health
+      - uses: grafana/setup-k6-action@v1
+      - name: Stress test
+        if: inputs.test != 'spike'
+        working-directory: performance
+        run: mkdir -p results && k6 run --quiet tests/stress.js
+      - name: Spike test
+        if: inputs.test != 'stress' && always()
+        working-directory: performance
+        run: mkdir -p results && k6 run --quiet tests/spike.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: k6-summaries
+          path: performance/results
+          retention-days: 14
